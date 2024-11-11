@@ -1,0 +1,209 @@
+/* General Layout */
+body {
+  background-color: #1e1e1e; /* Dark background for chat area */
+  color: white;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+/* Sidebar Styling */
+.sidebar {
+  background-color: #2a2a2a;
+  color: #ffffff;
+  padding: 1.5rem;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.fullwidth {
+  width: 100%;
+  margin: 5px 0;
+}
+
+.plain {
+  background-color: #ff4a4a;
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.mode-switch {
+  background-color: #2bff46;
+  color: #2a2a2a;
+  font-weight: bold;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Message Bubbles */
+.gpt_message td {
+  background-color: #333;
+  color: white;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 15px;
+  max-width: 70%;
+  display: inline-block;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+  font-size: medium;
+  align-self: flex-start;
+}
+
+.user_message td {
+  background-color: #007acc;
+  color: white;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 15px;
+  max-width: 70%;
+  display: inline-block;
+  float: right;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+  font-size: medium;
+  align-self: flex-end;
+}
+
+/* Voice Controls */
+.voice-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  margin-top: 15px;
+}
+
+.record-button {
+  background-color: #ff4a4a;
+  color: white;
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(255, 70, 43, 0.5);
+  animation: pulse 2s infinite;
+  cursor: pointer;
+}
+
+.record-button:hover {
+  transform: scale(1.1);
+}
+
+/* Transcription Text */
+.voice-transcript {
+  color: #ddd;
+  font-size: medium;
+  text-align: center;
+  background-color: #333;
+  border-radius: 10px;
+  padding: 10px;
+  width: 90%;
+  margin-top: 10px;
+}
+
+/* Update these styles in app.css */
+.call-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--color-background-dark);
+  padding: 2rem;
+}
+
+.avatar-container {
+  position: relative;
+  margin-bottom: 2rem;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar-pulse {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  background: rgba(255, 74, 74, 0.2);
+  animation: pulse 2s infinite;
+}
+
+/* Modified avatar-image class */
+.avatar-image {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  z-index: 1;
+}
+
+/* New class for the image itself */
+.avatar-image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 4px solid #ff4a4a;
+  object-fit: cover;
+  animation: recording 2s ease-in-out infinite;
+}
+
+.recording-status {
+  color: #ff4a4a;
+  font-size: 1.5rem;
+  margin: 2rem 0;
+  animation: pulse 2s infinite;
+  text-align: center;
+}
+
+.hang-up-button {
+  background-color: #ff4a4a;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.hang-up-button:hover {
+  background-color: #ff3333;
+}
+
+@keyframes recording {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

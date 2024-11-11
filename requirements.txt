@@ -1,0 +1,11 @@
+taipy
+requests
+python-dotenv
+speechrecognition
+gtts
+pygame
+llama-index
+qdrant-client
+typing-extensions
+torch
+transformers
