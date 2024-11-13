@@ -1,15 +1,73 @@
-/* General Layout */
+/* Theme Variables */
+:root {
+  /* Base Colors */
+  --color-black: #0a0a0a;
+  --color-purple: #2d1b3e;
+  --color-purple-light: #3d2453;
+  --color-orange: #ff4a1f;
+  --color-orange-light: #ff6b47;
+  
+  /* Light Theme */
+  --light-background: #f5f5f5;
+  --light-surface: #ffffff;
+  --light-text: var(--color-black);
+  --light-text-secondary: #4a4a4a;
+  
+  /* Dark Theme */
+  --dark-background: var(--color-black);
+  --dark-surface: var(--color-purple);
+  --dark-text: #ffffff;
+  --dark-text-secondary: #cccccc;
+}
+
+/* Light Theme Styles */
+body.taipy-light {
+  background-color: var(--light-background);
+  color: var(--light-text);
+}
+
+.taipy-light .sidebar {
+  background-color: var(--light-surface);
+  color: var(--light-text);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.taipy-dark .user_message td {
+  background-color: var(--color-orange);
+}
+
+.taipy-dark .gpt_message td {
+  background-color: var(--color-purple-light);
+}
+
+/* Dark Theme Styles */
+body.taipy-dark {
+  background-color: var(--dark-background);
+  color: var(--dark-text);
+}
+
+.taipy-dark .sidebar {
+  background-color: var(--color-purple);
+  color: var(--dark-text);
+}
+
+.taipy-dark .gpt_message td {
+  background-color: var(--color-purple);
+  color: var(--dark-text);
+}
+
+.taipy-dark .user_message td {
+  background-color: var(--color-orange);
+  color: var(--dark-text);
+}
+
+/* Shared Styles */
 body {
-  background-color: #1e1e1e; /* Dark background for chat area */
-  color: white;
   font-family: Arial, sans-serif;
   overflow: hidden;
 }
 
-/* Sidebar Styling */
 .sidebar {
-  background-color: #2a2a2a;
-  color: #ffffff;
   padding: 1.5rem;
   height: 100vh;
   overflow-y: auto;
@@ -21,18 +79,23 @@ body {
 }
 
 .plain {
-  background-color: #ff4a4a;
+  background-color: var(--color-orange);
   color: white;
   font-weight: bold;
   padding: 10px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.plain:hover {
+  background-color: var(--color-orange-light);
 }
 
 .mode-switch {
-  background-color: #2bff46;
-  color: #2a2a2a;
+  background-color: var(--color-purple-light);
+  color: var(--dark-text);
   font-weight: bold;
   padding: 10px;
   border: none;
@@ -40,32 +103,41 @@ body {
   cursor: pointer;
 }
 
-/* Message Bubbles */
-.gpt_message td {
-  background-color: #333;
-  color: white;
-  padding: 15px;
-  margin: 10px;
-  border-radius: 15px;
-  max-width: 70%;
-  display: inline-block;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
-  font-size: medium;
-  align-self: flex-start;
+.chat-container {
+  padding: 20px 40px;
 }
 
 .user_message td {
-  background-color: #007acc;
-  color: white;
+  margin-left: auto;  /* Push user messages to the right */
+  margin-right: 20px;
+  float: right;
+  text-align: right;
+  background-color: var(--color-orange);
+  max-width: 70%;
+  padding: 12px 18px;
+  border-radius: 15px 15px 4px 15px;
+}
+
+.gpt_message td {
+  margin-right: auto;  /* Keep bot messages on the left */
+  margin-left: 20px;
+  float: left;
+  text-align: left;
+  background-color: var(--color-purple-light);
+  max-width: 70%;
+  padding: 12px 18px;
+  border-radius: 15px 15px 15px 4px;
+}
+
+/* Message Bubbles */
+.gpt_message td, .user_message td {
   padding: 15px;
   margin: 10px;
   border-radius: 15px;
   max-width: 70%;
   display: inline-block;
-  float: right;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   font-size: medium;
-  align-self: flex-end;
 }
 
 /* Voice Controls */
@@ -78,7 +150,7 @@ body {
 }
 
 .record-button {
-  background-color: #ff4a4a;
+  background-color: var(--color-orange);
   color: white;
   border-radius: 50%;
   width: 90px;
@@ -87,35 +159,23 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 10px rgba(255, 70, 43, 0.5);
+  box-shadow: 0 0 10px rgba(255, 74, 31, 0.5);
   animation: pulse 2s infinite;
   cursor: pointer;
 }
 
 .record-button:hover {
-  transform: scale(1.1);
+  background-color: var(--color-orange-light);
 }
 
-/* Transcription Text */
-.voice-transcript {
-  color: #ddd;
-  font-size: medium;
-  text-align: center;
-  background-color: #333;
-  border-radius: 10px;
-  padding: 10px;
-  width: 90%;
-  margin-top: 10px;
-}
-
-/* Update these styles in app.css */
+/* Call Page Styles */
 .call-page {
+  background-color: var(--dark-background);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  background-color: var(--color-background-dark);
   padding: 2rem;
 }
 
@@ -124,9 +184,6 @@ body {
   margin-bottom: 2rem;
   width: 160px;
   height: 160px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .avatar-pulse {
@@ -136,11 +193,10 @@ body {
   right: 0;
   bottom: 0;
   border-radius: 50%;
-  background: rgba(255, 74, 74, 0.2);
+  background: rgba(255, 74, 31, 0.2);
   animation: pulse 2s infinite;
 }
 
-/* Modified avatar-image class */
 .avatar-image {
   position: relative;
   width: 150px;
@@ -148,26 +204,24 @@ body {
   z-index: 1;
 }
 
-/* New class for the image itself */
 .avatar-image img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  border: 4px solid #ff4a4a;
+  border: 4px solid var(--color-orange);
   object-fit: cover;
   animation: recording 2s ease-in-out infinite;
 }
 
 .recording-status {
-  color: #ff4a4a;
+  color: var(--color-orange);
   font-size: 1.5rem;
   margin: 2rem 0;
   animation: pulse 2s infinite;
-  text-align: center;
 }
 
 .hang-up-button {
-  background-color: #ff4a4a;
+  background-color: var(--color-orange);
   color: white;
   padding: 1rem 2rem;
   border-radius: 8px;
@@ -178,32 +232,39 @@ body {
 }
 
 .hang-up-button:hover {
-  background-color: #ff3333;
+  background-color: var(--color-orange-light);
+}
+
+.message-input {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background: var(--dark-surface);
+}
+
+/* Message spacing */
+.taipy-table tr {
+  margin-bottom: 16px;
+  display: block;
+  clear: both;
+  width: 100%;
+}
+
+/* Message table layout */
+.message-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 12px;
 }
 
 @keyframes recording {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
 @keyframes pulse {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.5;
-    transform: scale(1.1);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.1); }
+  100% { opacity: 1; transform: scale(1); }
 }

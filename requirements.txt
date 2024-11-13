@@ -9,3 +9,4 @@ qdrant-client
 typing-extensions
 torch
 transformers
+openai

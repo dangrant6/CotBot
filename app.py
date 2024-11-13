@@ -517,13 +517,13 @@ def voice_recording_status(state: State, status: Any) -> None:
             
         # Always reset recording state after processing
         state.is_recording = False
-        state.recording_text = "Start Recording"
+        state.recording_text = "Call"
         
     except Exception as e:
         logger.error(f"Error in voice recording status: {e}", exc_info=True)
         notify(state, "error", f"Error processing voice input: {str(e)}")
         state.is_recording = False
-        state.recording_text = "Start Recording"
+        state.recording_text = "Call"
 
 def speak_response(text: str) -> None:
     """Enhanced text-to-speech with immediate feedback"""
@@ -563,7 +563,7 @@ def toggle_recording(state: State) -> None:
         if state.is_recording:
             print("DEBUG: Stopping recording")
             state.is_recording = False
-            state.recording_text = "Start Recording"
+            state.recording_text = "Call"
             notify(state, "info", "Recording stopped")
             navigate(state, "main")
         else:
@@ -587,7 +587,7 @@ def toggle_recording(state: State) -> None:
         print(f"DEBUG: Error in toggle_recording: {e}")
         logger.error(f"Error in toggle_recording: {e}")
         state.is_recording = False
-        state.recording_text = "Start Recording"
+        state.recording_text = "Call"
         navigate(state, "main")
 
 def end_call(state: State) -> None:
@@ -596,7 +596,7 @@ def end_call(state: State) -> None:
         print("DEBUG: Ending call")
         # Stop recording first
         state.is_recording = False
-        state.recording_text = "Start Recording"
+        state.recording_text = "Call"
         
         # Clear any pending audio
         try:
@@ -625,13 +625,13 @@ def handle_voice_result(state: State, result: Any) -> None:
         # Reset recording state if done
         if isinstance(result, bool) and result:
             state.is_recording = False
-            state.recording_text = "Start Recording"
+            state.recording_text = "Call"
             
     except Exception as e:
         print(f"DEBUG: Error in handle_voice_result: {e}")
         logger.error(f"Error in handle_voice_result: {e}")
         state.is_recording = False
-        state.recording_text = "Start Recording"
+        state.recording_text = "Call"
         
 def process_transcription(state: State) -> None:
     """Process transcribed text from queue"""
@@ -663,7 +663,7 @@ def switch_mode(state: State) -> None:
     try:
         state.chat_mode = ChatMode.VOICE if state.chat_mode == ChatMode.TEXT else ChatMode.TEXT
         state.is_recording = False
-        state.recording_text = "Start Recording"
+        state.recording_text = "Call"
         state.mode_switch_text = "Voice" if state.chat_mode == ChatMode.TEXT else "Text"
         notify(state, "info", f"Switched to {state.chat_mode.value} mode")
     except Exception as e:
@@ -725,7 +725,6 @@ main_page_md = """
 <|{current_user_message}|input|label=Write your message here...|on_action=send_message|class_name=fullwidth|on_change=on_input_change|>
 <|part|class_name=voice-controls|visible={chat_mode == ChatMode.VOICE}|
 <|{recording_text}|button|class_name=record-button|on_action=toggle_recording|>
-<|{current_user_message}|text|class_name=voice-transcript|>
 |>
 |>
 |>
@@ -768,6 +767,6 @@ if __name__ == "__main__":
         }
         
         gui = Gui(pages=pages, path_mapping=path_mapping)
-        gui.run(title="💬 VCell-R", dark_mode=True, stylekit=stylekit)
+        gui.run(title="💬 Matey", dark_mode=True, stylekit=stylekit)
     except Exception as e:
         print(f"Error starting the application: {str(e)}")
